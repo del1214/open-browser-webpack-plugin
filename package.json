@@ -1,6 +1,6 @@
 {
   "name": "open-browser-webpack-hooks-plugin",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "description": "Open the browser when Webpack hooks is ready serving your files.",
   "main": "index.js",
   "scripts": {

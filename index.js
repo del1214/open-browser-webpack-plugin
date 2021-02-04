@@ -29,34 +29,34 @@ function once(fn) {
 function OpenBrowserWebpackHooksPlugin(options) {
   options || (options = {});
   this.url = options.url || 'http://localhost:8080';
-  this.delay = options.delay || 0;
-  this.browser = options.browser;
-  this.ignoreErrors = options.ignoreErrors;
+  this.wait = options.wait || true;
+  this.app = options.app;
+  this.allowNonzeroExitCode = options.allowNonzeroExitCode || false;
 }
 
 OpenBrowserWebpackHooksPlugin.prototype.apply = function(compiler) {
   var isWatching = false;
   var url = this.url;
-  var delay = this.delay;
-  var browser = this.browser;
-  var ignoreErrors = this.ignoreErrors;
-  var executeOpen = once(function() {
-    setTimeout(function () {
-      open(url, browser, function(err) {
-        if (err) throw err;
-      });
-    }, delay);
+  var wait = this.wait;
+  var app = this.app;
+  var allowNonzeroExitCode = this.allowNonzeroExitCode;
+  var executeOpen = once(async function() {
+    await open(url, {
+      app,
+      wait,
+      allowNonzeroExitCode
+    });
   })
 
   compiler.hooks.emit.tap('OpenBrowserWebpackHooksPlugin', (compilation) => {
     isWatching = true;
   });
 
-  compiler.hooks.done.tap('OpenBrowserWebpackHooksPlugin', function doneCallback (stats) {
+  compiler.hooks.done.tap('OpenBrowserWebpackHooksPlugin', (stats) => {
     if (isWatching && (!stats.hasErrors() || ignoreErrors)) {
       executeOpen();
     }
   });
 };
 
-module.exports = OpenBrowserPlugin;
+module.exports = OpenBrowserWebpackHooksPlugin;
