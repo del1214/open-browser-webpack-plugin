@@ -26,7 +26,7 @@ function once(fn) {
  * @param {Boolean} [options.ignoreErrors] Ignore webpack errors.
  * @constructor
  */
-function OpenBrowserPlugin(options) {
+function OpenBrowserWebpackHooksPlugin(options) {
   options || (options = {});
   this.url = options.url || 'http://localhost:8080';
   this.delay = options.delay || 0;
@@ -34,7 +34,7 @@ function OpenBrowserPlugin(options) {
   this.ignoreErrors = options.ignoreErrors;
 }
 
-OpenBrowserPlugin.prototype.apply = function(compiler) {
+OpenBrowserWebpackHooksPlugin.prototype.apply = function(compiler) {
   var isWatching = false;
   var url = this.url;
   var delay = this.delay;
@@ -48,12 +48,11 @@ OpenBrowserPlugin.prototype.apply = function(compiler) {
     }, delay);
   })
 
-  compiler.plugin('watch-run', function checkWatchingMode(watching, done) {
+  compiler.hooks.emit.tap('OpenBrowserWebpackHooksPlugin', (compilation) => {
     isWatching = true;
-    done();
   });
 
-  compiler.plugin('done', function doneCallback(stats) {
+  compiler.hooks.done.tap('OpenBrowserWebpackHooksPlugin', function doneCallback (stats) {
     if (isWatching && (!stats.hasErrors() || ignoreErrors)) {
       executeOpen();
     }

@@ -1,5 +1,5 @@
 var path = require('path');
-var OpenBrowserPlugin = require('../index');
+var OpenBrowserWebpackHooksPlugin = require('../index');
 
 module.exports = {
   entry: path.resolve(__dirname, 'lib/entry.js'),
@@ -8,6 +8,6 @@ module.exports = {
     filename: "bundle.js"
   },
   plugins: [
-    new OpenBrowserPlugin({ url: 'http://localhost:3000' })
+    new OpenBrowserWebpackHooksPlugin({ url: 'http://localhost:3000' })
   ]
 };

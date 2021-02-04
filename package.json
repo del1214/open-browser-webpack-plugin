@@ -1,7 +1,7 @@
 {
-  "name": "open-browser-webpack-plugin",
-  "version": "0.0.5",
-  "description": "Opens the browser when Webpack is ready serving your files.",
+  "name": "open-browser-webpack-hooks-plugin",
+  "version": "0.0.1",
+  "description": "Open the browser when Webpack hooks is ready serving your files.",
   "main": "index.js",
   "scripts": {
     "debug": "node fixtures/debug.js",
@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/baldore/webpack-open-plugin.git"
+    "url": "git+https://github.com/del1214/open-browser-webpack-plugin"
   },
   "keywords": [
     "webpack",
@@ -21,16 +21,16 @@
     "ready",
     "improvement"
   ],
-  "author": "Camilo Orrego",
+  "author": "del1214",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/baldore/webpack-open-plugin/issues"
+    "url": "https://github.com/del1214/open-browser-webpack-plugin/issues"
   },
-  "homepage": "https://github.com/baldore/webpack-open-plugin#readme",
+  "homepage": "https://github.com/del1214/open-browser-webpack-plugin#readme",
   "dependencies": {
-    "open": "0.0.5"
+    "open": "^7.4.0"
   },
   "devDependencies": {
-    "webpack": "^1.12.1"
+    "webpack": "^4.44.1"
   }
 }
